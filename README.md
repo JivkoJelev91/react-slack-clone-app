@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-![alt text](https://imgur.com/a/lzXnKFo)
+![alt text](<blockquote class="imgur-embed-pub" lang="en" data-id="ADkzL2k" data-context="false" ><a href="//imgur.com/ADkzL2k"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
