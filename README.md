@@ -14,7 +14,10 @@ Simple slack-clone application. Made with React, TypeScript, Redux, Firebase.
 
 ## Usage
 
-To run the application locally; clone the repo, install dependencies and run the app.
+To run the application locally: 
+ * Clone the repo
+ * Install dependencies
+ * Run the app
 
 ```
 $ git clone https://github.com/JivkoJelev91/react-slack-clone-app.git
