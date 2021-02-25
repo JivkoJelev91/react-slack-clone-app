@@ -27,4 +27,6 @@ $ npm install
 $ npm start
 ```
 
+## Note
+
 > :warning: After running the project, note that, firebaseConfig file is missing. Setup your firebase config from https://console.firebase.google.com/ and enjoy!
