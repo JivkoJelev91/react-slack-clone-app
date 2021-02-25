@@ -14,7 +14,7 @@ import { db } from '../config/firebase';
 import { css } from '@emotion/css';
 
 const ROOT_CSS = css({
-  height: 'calc(100vh - 170px)',
+  height: 'calc(100vh - 172px)',
 });
 
 const Chat: FC = () => {
@@ -67,7 +67,7 @@ const Chat: FC = () => {
           </ScrollToBottom>
 
           <ChatInput
-            channelName={roomDetails?.data().name}
+            channelName={roomDetails?.data()?.name}
             channelId={roomId}
           />
         </>

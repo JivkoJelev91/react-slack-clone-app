@@ -79,6 +79,10 @@ const SideBarContainer = styled.div`
     margin-bottom: 10px;
     border: 1px solid #49274b;
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const SideBarHeader = styled.div`
