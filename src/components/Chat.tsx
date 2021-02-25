@@ -1,21 +1,28 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
+import ScrollToBottom from 'react-scroll-to-bottom';
+
 import ChatInput from './ChatInput';
 import Message from './Message';
 import StarBorderOutlinedIcon from '@material-ui/icons/StarBorderOutlined';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+
 import { useSelector } from 'react-redux';
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
 import { selectRoomId } from '../reducers/appSlice';
 import { db } from '../config/firebase';
+import { css } from '@emotion/css';
+
+const ROOT_CSS = css({
+  height: 'calc(100vh - 170px)',
+});
 
 const Chat: FC = () => {
-  const chatRef = useRef<null | HTMLDivElement>(null);
   const roomId = useSelector(selectRoomId);
   const [roomDetails] = useDocument(
     roomId && db.collection('rooms').doc(roomId)
   );
-  const [roomMessages, loading] = useCollection(
+  const [roomMessages] = useCollection(
     roomId &&
       db
         .collection('rooms')
@@ -23,12 +30,6 @@ const Chat: FC = () => {
         .collection('messages')
         .orderBy('timestamp', 'asc')
   );
-
-  useEffect(() => {
-    chatRef?.current?.scrollIntoView({
-      behavior: 'smooth',
-    });
-  }, [roomId, loading]);
 
   return (
     <ChatContainer>
@@ -48,25 +49,24 @@ const Chat: FC = () => {
               </p>
             </HeaderRight>
           </Header>
-
-          <ChatMessages>
-            {roomMessages?.docs.map((doc) => {
-              const { message, timestamp, user, userImage } = doc.data();
-              return (
-                <Message
-                  key={doc.id}
-                  message={message}
-                  timestamp={timestamp}
-                  user={user}
-                  userImage={userImage}
-                />
-              );
-            })}
-            <ChatBottom ref={chatRef} />
-          </ChatMessages>
+          <ScrollToBottom>
+            <ChatMessages className={ROOT_CSS}>
+              {roomMessages?.docs.map((doc) => {
+                const { message, timestamp, user, userImage } = doc.data();
+                return (
+                  <Message
+                    key={doc.id}
+                    message={message}
+                    timestamp={timestamp}
+                    user={user}
+                    userImage={userImage}
+                  />
+                );
+              })}
+            </ChatMessages>
+          </ScrollToBottom>
 
           <ChatInput
-            chatRef={chatRef}
             channelName={roomDetails?.data().name}
             channelId={roomId}
           />
@@ -81,7 +81,6 @@ export default Chat;
 const ChatContainer = styled.div`
   flex: 0.7;
   flex-grow: 1;
-  overflow-y: scroll;
   margin-top: 60px;
 `;
 
@@ -122,7 +121,3 @@ const HeaderRight = styled.div`
 `;
 
 const ChatMessages = styled.div``;
-
-const ChatBottom = styled.div`
-  padding-bottom: 200px;
-`;

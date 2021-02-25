@@ -13,7 +13,7 @@ const Login: FC = () => {
   return (
     <LoginContainer>
       <LoginInnerContainer>
-        <img src={logo} alt='logo' />
+        <img src={logo} alt='' />
         <h2>Sign in to the Galabovo Maika Slack</h2>
         <p>galabovo.maika.slack.com</p>
         <Button onClick={signIn}>Sign in with Google</Button>

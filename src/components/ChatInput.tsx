@@ -1,53 +1,56 @@
-import React, { FC, MutableRefObject, useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
+import firebase from 'firebase';
+import SendIcon from '@material-ui/icons/Send';
+
 import { db, auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Button } from '@material-ui/core';
-import firebase from 'firebase';
+import { useScrollToBottom } from 'react-scroll-to-bottom';
 
 interface Props {
   channelName?: string;
   channelId?: string;
-  chatRef?: MutableRefObject<HTMLDivElement | null>;
 }
 
-const ChatInput: FC<Props> = ({ channelName, channelId, chatRef }) => {
+const ChatInput: FC<Props> = ({ channelName, channelId }) => {
   const [user] = useAuthState(auth);
   const [message, setMessage] = useState<string>('');
+  const scrollToBottom = useScrollToBottom();
 
-  const sendMessage = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void => {
+  const sendMessage = (e: React.SyntheticEvent): void => {
     e.preventDefault();
 
     if (!channelId) return;
 
+    if (!message) return;
+
     db.collection('rooms').doc(channelId).collection('messages').add({
       message,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      user: user.displayName,
-      userImage: user.photoURL,
+      user: user?.displayName,
+      userImage: user?.photoURL,
     });
 
-    chatRef?.current?.scrollIntoView({
-      behavior: 'smooth',
-    });
-
+    scrollToBottom();
     setMessage('');
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>): void => {
+    if (e.key === 'Enter') {
+      sendMessage(e);
+    }
   };
 
   return (
     <ChatInputContainer>
-      <form>
-        <input
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder={`Message #${channelName}`}
-        />
-        <Button hidden type='submit' onClick={sendMessage}>
-          SEND
-        </Button>
-      </form>
+      <input
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder={`Message #${channelName}`}
+        onKeyDown={onKeyDown}
+        autoFocus
+      />
+      <SendIcon onClick={sendMessage} />
     </ChatInputContainer>
   );
 };
@@ -56,30 +59,29 @@ export default ChatInput;
 
 const ChatInputContainer = styled.div`
   border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
 
-  > form {
-    position: relative;
-    display: flex;
-    justify-content: center;
+  > .MuiSvgIcon-root {
+    color: #1976d2;
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
   }
 
-  > form > input {
-    position: fixed;
-    bottom: 30px;
-    width: 60%;
+  > input {
+    width: 100%;
     border: 1px solid gray;
     border-radius: 3px;
-    padding: 20px;
+    padding: 15px 20px;
     outline: none;
 
     @media (max-width: 768px) {
       bottom: 10px;
-      width: 50%;
       padding: 15px;
     }
-  }
-
-  > form > button {
-    display: none !important;
   }
 `;

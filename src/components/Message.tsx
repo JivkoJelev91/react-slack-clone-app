@@ -25,7 +25,7 @@ const Message: FC<Props> = ({ message, timestamp, user, userImage }) => {
   const timestampDate = convertTimestampToDate(timestamp);
   return (
     <MessageContainer>
-      <img src={userImage} alt='userImage' />
+      <img src={userImage} alt='' />
       <MessageInfo>
         <h4>
           {user}

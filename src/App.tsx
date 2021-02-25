@@ -17,7 +17,7 @@ const App: FC = () => {
     return (
       <AppLoading>
         <AppLoadingContents>
-          <img src={logo} alt='logo' />
+          <img src={logo} alt='' />
           <Spinner name='ball-spin-fade-loader' color='purple' fadeIn='none' />
         </AppLoadingContents>
       </AppLoading>
