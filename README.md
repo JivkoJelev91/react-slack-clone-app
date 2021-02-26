@@ -26,3 +26,9 @@ $ cd react-slack-clone-app
 $ npm install
 $ npm start
 ```
+
+## Note :warning: 
+
+> After running the project, note that, firebaseConfig file is missing. <br />
+> Setup your firebase config from https://console.firebase.google.com/ <br />
+> For more info visit https://firebase.google.com/docs/web/setup 
