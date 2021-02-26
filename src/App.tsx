@@ -7,6 +7,7 @@ import Chat from './components/Chat';
 import Login from './components/Login';
 import logo from './resources/goldFish.jpg';
 import Spinner from 'react-spinkit';
+
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './config/firebase';
 
@@ -25,7 +26,7 @@ const App: FC = () => {
   }
 
   return (
-    <div className='App'>
+    <div>
       <Router>
         {!user ? (
           <Login />

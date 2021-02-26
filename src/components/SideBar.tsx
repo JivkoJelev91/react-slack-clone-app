@@ -28,7 +28,7 @@ const SideBar: FC = () => {
         <SideBarInfo>
           <h3>
             <FiberManualRecordIcon />
-            {user.displayName}
+            {user?.displayName}
           </h3>
         </SideBarInfo>
       </SideBarHeader>
@@ -52,7 +52,7 @@ const SideBar: FC = () => {
       <hr />
       <SideBarOption Icon={AddIcon} title='Add channel' addChannelOption />
 
-      {channels?.docs.map((doc) => (
+      {channels?.docs?.map((doc) => (
         <SideBarOption
           key={doc.id}
           id={doc.id}

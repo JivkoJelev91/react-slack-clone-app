@@ -4,6 +4,7 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 
 import ChatInput from './ChatInput';
 import Message from './Message';
+
 import StarBorderOutlinedIcon from '@material-ui/icons/StarBorderOutlined';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 

@@ -54,6 +54,9 @@ const HeaderLeft = styled.div`
     margin-left: auto;
     margin-right: 30px;
   }
+  @media (max-width: 768px) {
+    margin-left: 10px;
+  }
 `;
 
 const HeaderRight = styled.div`
@@ -68,7 +71,7 @@ const HeaderRight = styled.div`
   }
 
   @media (max-width: 768px) {
-    margin: 0;
+    margin-right: 10px;
   }
 `;
 
