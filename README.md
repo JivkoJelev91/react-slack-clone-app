@@ -11,7 +11,6 @@
 
 * 📝 Public chat rooms
 * 📡 Realtime sending and receiving of messages
-* 💬 Soon: Typing and presence indicators
 
 ## Usage
 
