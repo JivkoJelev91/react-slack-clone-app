@@ -29,6 +29,6 @@ $ npm start
 
 ## Note :warning: 
 
-> After running the project, note that, firebaseConfig and openApiKey files are missing. <br />
+> After running the project, note that, firebaseConfig and openApiKey keys are missing. <br />
 > Setup your firebase config from https://console.firebase.google.com/ <br />
 > Setup your openApiKey config from https://beta.openai.com/account/api-keys <br />
