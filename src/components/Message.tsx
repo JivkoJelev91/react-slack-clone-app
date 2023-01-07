@@ -50,6 +50,7 @@ const MessageContainer = styled.div`
 
   > img {
     height: 50px;
+    width: 50px;
     border-radius: 8px;
   }
 `;

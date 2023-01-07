@@ -31,6 +31,7 @@ const Chat: FC = () => {
         .collection('messages')
         .orderBy('timestamp', 'asc')
   );
+  const roomName = roomDetails?.data()?.name; 
 
   return (
     <ChatContainer>
@@ -39,7 +40,7 @@ const Chat: FC = () => {
           <Header>
             <HeaderLeft>
               <h4>
-                <strong>#{roomDetails?.data()?.name}</strong>
+                <strong>#{roomName}</strong>
               </h4>
               <StarBorderOutlinedIcon />
             </HeaderLeft>
@@ -53,10 +54,10 @@ const Chat: FC = () => {
           <ScrollToBottom>
             <ChatMessages className={ROOT_CSS}>
               {roomMessages?.docs.map((doc) => {
-                const { message, timestamp, user, userImage, id } = doc.data();
+                const { message, timestamp, user, userImage } = doc.data();
                 return (
                   <Message
-                    key={id}
+                    key={doc.id}
                     message={message}
                     timestamp={timestamp}
                     user={user}
@@ -68,7 +69,7 @@ const Chat: FC = () => {
           </ScrollToBottom>
 
           <ChatInput
-            channelName={roomDetails?.data()?.name}
+            channelName={roomName}
             channelId={roomId}
           />
         </>

@@ -7,7 +7,6 @@ import { db, auth } from '../config/firebase';
 import { getAnswer } from '../requests/openApiRequest';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useScrollToBottom } from 'react-scroll-to-bottom';
-import { useDocument } from 'react-firebase-hooks/firestore';
 
 interface Props {
   channelName?: string;
@@ -16,19 +15,14 @@ interface Props {
 
 const ChatInput: FC<Props> = ({ channelName, channelId }) => {
   const [user] = useAuthState(auth);
-  const [roomDetails] = useDocument(
-    channelId && db.collection('rooms').doc(channelId)
-  );
-  const isOpenAIroom = roomDetails?.data()?.name === 'OPENAI';
+  const isOpenAIroom = channelName === 'OPENAI';
   const [message, setMessage] = useState<string>('');
   const scrollToBottom = useScrollToBottom();
 
   const sendMessage = (e: React.SyntheticEvent): void => {
     e.preventDefault();
 
-    if (!channelId) return;
-
-    if (!message) return;
+    if (!channelId || !message) return;
 
     db.collection('rooms').doc(channelId).collection('messages').add({
       message,
@@ -47,6 +41,7 @@ const ChatInput: FC<Props> = ({ channelName, channelId }) => {
 
       if(isOpenAIroom){
         const response = await getAnswer(message);
+
         db.collection('rooms').doc(channelId).collection('messages').add({
           message: response,
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
