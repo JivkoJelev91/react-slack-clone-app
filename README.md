@@ -11,6 +11,7 @@
 
 * 📝 Public chat rooms
 * 📡 Realtime sending and receiving of messages
+* 🤖 ChatGPT is available in OPENAI Room
 
 ## Usage
 
@@ -28,6 +29,6 @@ $ npm start
 
 ## Note :warning: 
 
-> After running the project, note that, firebaseConfig file is missing. <br />
+> After running the project, note that, firebaseConfig and openApiKey files are missing. <br />
 > Setup your firebase config from https://console.firebase.google.com/ <br />
-> For more info visit https://firebase.google.com/docs/web/setup 
+> Setup your openApiKey config from https://beta.openai.com/account/api-keys <br />
