@@ -1,6 +1,6 @@
 # React Slack Clone
 
-> Simple slack-clone application. Made with React, TypeScript, Redux, Firebase.
+> Simple slack-clone application. Made with React, TypeScript, Redux-Toolkit, Firebase.
 
 > See the demo here: https://slack-clone-c4d97.web.app/
 
