@@ -17,6 +17,7 @@
     "@types/styled-components": "^5.1.7",
     "cra-template-typescript": "1.1.2",
     "firebase": "^8.2.9",
+    "openai": "^3.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-firebase-hooks": "^2.2.0",

@@ -4,8 +4,10 @@ import firebase from 'firebase';
 import SendIcon from '@material-ui/icons/Send';
 
 import { db, auth } from '../config/firebase';
+import { getAnswer } from '../requests/openApiRequest';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useScrollToBottom } from 'react-scroll-to-bottom';
+import { useDocument } from 'react-firebase-hooks/firestore';
 
 interface Props {
   channelName?: string;
@@ -14,6 +16,10 @@ interface Props {
 
 const ChatInput: FC<Props> = ({ channelName, channelId }) => {
   const [user] = useAuthState(auth);
+  const [roomDetails] = useDocument(
+    channelId && db.collection('rooms').doc(channelId)
+  );
+  const isOpenAIroom = roomDetails?.data()?.name === 'OPENAI';
   const [message, setMessage] = useState<string>('');
   const scrollToBottom = useScrollToBottom();
 
@@ -35,9 +41,19 @@ const ChatInput: FC<Props> = ({ channelName, channelId }) => {
     setMessage('');
   };
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>): void => {
+  const onKeyDown = async (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') {
       sendMessage(e);
+
+      if(isOpenAIroom){
+        const response = await getAnswer(message);
+        db.collection('rooms').doc(channelId).collection('messages').add({
+          message: response,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          user: 'OPENAI',
+          userImage: 'OPENAI',
+        });
+      }
     }
   };
 

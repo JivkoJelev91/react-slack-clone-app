@@ -53,10 +53,10 @@ const Chat: FC = () => {
           <ScrollToBottom>
             <ChatMessages className={ROOT_CSS}>
               {roomMessages?.docs.map((doc) => {
-                const { message, timestamp, user, userImage } = doc.data();
+                const { message, timestamp, user, userImage, id } = doc.data();
                 return (
                   <Message
-                    key={doc.id}
+                    key={id}
                     message={message}
                     timestamp={timestamp}
                     user={user}

@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import firebase from 'firebase';
+import OpenAiIcon from '../resources/openAIimage.png';
 
 interface TimestampState {
   seconds: number;
@@ -23,9 +24,10 @@ const convertTimestampToDate = (timestamp: TimestampState | any): Date | any =>
 
 const Message: FC<Props> = ({ message, timestamp, user, userImage }) => {
   const timestampDate = convertTimestampToDate(timestamp);
+  const image = userImage === 'OPENAI' ? OpenAiIcon : userImage;
   return (
     <MessageContainer>
-      <img src={userImage} alt='' />
+      <img src={image} alt='' />
       <MessageInfo>
         <h4>
           {user}

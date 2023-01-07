@@ -13,6 +13,7 @@
 
 # config
 /src/config/firebaseConfig.ts
+/src/config/openApiKey.ts
 
 # misc
 .DS_Store
