@@ -13,7 +13,7 @@
 
 * 📝 Public chat rooms
 * 📡 Realtime sending and receiving of messages
-* 🤖 ChatGPT is available in OPENAI Room
+* 🤖 ChatGPT is available in OPENAI Room 🆕
 
 ## Usage
 
