@@ -1,13 +1,10 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
-import Header from './components/Header';
-import SideBar from './components/SideBar';
-import Chat from './components/Chat';
-import Login from './components/Login';
 import logo from './resources/goldFish.jpg';
 import Spinner from 'react-spinkit';
 
+import { Header, SideBar, Chat, Login } from 'components';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './config/firebase';
 

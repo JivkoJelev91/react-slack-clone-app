@@ -1,6 +1,5 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import styled from 'styled-components';
-import SideBarOption from './SideBarOption';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import InsertCommentIcon from '@material-ui/icons/InsertComment';
 import InboxIcon from '@material-ui/icons/Inbox';
@@ -13,6 +12,7 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddIcon from '@material-ui/icons/Add';
 
+import { SideBarOption } from 'components';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../config/firebase';

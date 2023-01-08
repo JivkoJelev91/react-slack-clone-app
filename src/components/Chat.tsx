@@ -1,13 +1,11 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import ScrollToBottom from 'react-scroll-to-bottom';
-
-import ChatInput from './ChatInput';
-import Message from './Message';
 
 import StarBorderOutlinedIcon from '@material-ui/icons/StarBorderOutlined';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
+import { ChatInput, Message } from 'components';
 import { useSelector } from 'react-redux';
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
 import { selectRoomId } from '../reducers/appSlice';

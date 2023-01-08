@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect, ComponentType } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { enterRoom } from '../reducers/appSlice';
@@ -7,7 +7,7 @@ import { db } from '../config/firebase';
 interface Props {
   title: string;
   id?: string;
-  Icon?: React.ComponentType;
+  Icon?: ComponentType;
   addChannelOption?: boolean;
   defaultRoomId?: string;
 }

@@ -1,7 +1,8 @@
-import React, { FC, useState } from 'react';
+import { FC, useState, SyntheticEvent, KeyboardEvent } from 'react';
 import styled from 'styled-components';
 import firebase from 'firebase';
 import SendIcon from '@material-ui/icons/Send';
+import OpenAiIcon from '../resources/openAIimage.png';
 
 import { db, auth } from '../config/firebase';
 import { getAnswer } from '../requests/openApiRequest';
@@ -13,13 +14,15 @@ interface Props {
   channelId?: string;
 }
 
+const chatBotRoomAvailable = 'OPENAI';
+
 const ChatInput: FC<Props> = ({ channelName, channelId }) => {
   const [user] = useAuthState(auth);
-  const isOpenAIroom = channelName === 'OPENAI';
+  const isOpenAIroom = channelName === chatBotRoomAvailable;
   const [message, setMessage] = useState<string>('');
   const scrollToBottom = useScrollToBottom();
 
-  const sendMessage = (e: React.SyntheticEvent): void => {
+  const sendMessage = (e: SyntheticEvent): void => {
     e.preventDefault();
 
     if (!channelId || !message) return;
@@ -35,7 +38,7 @@ const ChatInput: FC<Props> = ({ channelName, channelId }) => {
     setMessage('');
   };
 
-  const onKeyDown = async (e: React.KeyboardEvent<HTMLDivElement>) => {
+  const onKeyDown = async (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') {
       sendMessage(e);
 
@@ -45,8 +48,8 @@ const ChatInput: FC<Props> = ({ channelName, channelId }) => {
         db.collection('rooms').doc(channelId).collection('messages').add({
           message: response,
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-          user: 'OPENAI',
-          userImage: 'OPENAI',
+          user: 'ChatGPT',
+          userImage: OpenAiIcon,
         });
       }
     }
